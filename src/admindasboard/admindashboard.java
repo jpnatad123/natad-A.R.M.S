@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package admindasboard;
+import config.Session;
 import java.awt.Color;
 import internalPages.*;
 import internalPages.dashBoardPage;
 import internalPages.userprofile;
+
 /**
  *
  * @author izana
@@ -34,6 +36,7 @@ public class admindashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         maindesktop = new javax.swing.JDesktopPane();
         header = new javax.swing.JPanel();
@@ -44,6 +47,10 @@ public class admindashboard extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         reportpane = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        PROFILE = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+
+        jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -73,6 +80,7 @@ public class admindashboard extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 830, 520));
 
         navbar.setBackground(new java.awt.Color(102, 102, 102));
+        navbar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         dashpane.setBackground(new java.awt.Color(102, 102, 102));
         dashpane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -89,8 +97,11 @@ public class admindashboard extends javax.swing.JFrame {
         dashpane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("DASHBOARD");
-        dashpane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 180, -1));
+        dashpane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, -1));
+
+        navbar.add(dashpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, -1, 50));
 
         userpane.setBackground(new java.awt.Color(102, 102, 102));
         userpane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -111,6 +122,8 @@ public class admindashboard extends javax.swing.JFrame {
         jLabel2.setText("Students");
         userpane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 220, 30));
 
+        navbar.add(userpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 210, 50));
+
         reportpane.setBackground(new java.awt.Color(102, 102, 102));
         reportpane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -127,26 +140,28 @@ public class admindashboard extends javax.swing.JFrame {
         jLabel3.setText("REPORTS");
         reportpane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 10, 210, -1));
 
-        javax.swing.GroupLayout navbarLayout = new javax.swing.GroupLayout(navbar);
-        navbar.setLayout(navbarLayout);
-        navbarLayout.setHorizontalGroup(
-            navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dashpane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(userpane, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(navbarLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(reportpane, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        navbarLayout.setVerticalGroup(
-            navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navbarLayout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(dashpane, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(userpane, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(reportpane, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        navbar.add(reportpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, 50));
+
+        PROFILE.setBackground(new java.awt.Color(102, 102, 102));
+        PROFILE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PROFILEMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PROFILEMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PROFILEMouseExited(evt);
+            }
+        });
+        PROFILE.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("PROFILE");
+        PROFILE.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, 30));
+
+        navbar.add(PROFILE, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 210, 50));
 
         getContentPane().add(navbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 520));
 
@@ -188,6 +203,26 @@ public class admindashboard extends javax.swing.JFrame {
        maindesktop.add(dbp).setVisible(true);
     }//GEN-LAST:event_dashpaneMouseClicked
 
+    private void PROFILEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PROFILEMouseClicked
+        userprofile up = new userprofile();
+        maindesktop.add(up).setVisible(true);
+    Session sess = Session.getInstance();
+   
+    // This fills the labels you see in image_bf27a8.png
+    up.p_name.setText(sess.getName());
+    up.p_id.setText("" + sess.getId());
+    up.p_email.setText(sess.getEmail());
+    
+    }//GEN-LAST:event_PROFILEMouseClicked
+
+    private void PROFILEMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PROFILEMouseEntered
+        PROFILE.setBackground(bodycolor);
+    }//GEN-LAST:event_PROFILEMouseEntered
+
+    private void PROFILEMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PROFILEMouseExited
+        PROFILE.setBackground(navcolor);
+    }//GEN-LAST:event_PROFILEMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -224,11 +259,14 @@ public class admindashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PROFILE;
     private javax.swing.JPanel dashpane;
     private javax.swing.JPanel header;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JDesktopPane maindesktop;
     private javax.swing.JPanel navbar;

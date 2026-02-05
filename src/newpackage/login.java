@@ -6,10 +6,12 @@
 package newpackage;
 
 import admindasboard.admindashboard;
+import config.Session;
 import config.configclass;
 import internalPages.dashBoardPage;
 import internalPages.userprofile;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -43,10 +45,10 @@ public class login extends javax.swing.JFrame {
         fullname = new javax.swing.JTextField();
         pass = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -113,6 +115,8 @@ public class login extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logo (2).png"))); // NOI18N
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 500, 410));
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logo (2).png"))); // NOI18N
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -130,18 +134,15 @@ public class login extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logo (2).png"))); // NOI18N
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, -60, -1, -1));
-
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Email");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 114, 70, 30));
 
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Password");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 214, 150, 30));
 
         jButton2.setText("Log in");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -210,11 +211,8 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_fullnameActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-          String userEmail = email.getText();
+       String userEmail = email.getText();
     String userPassword = Password.getText();
-    
-    System.out.println("DEBUG: Email entered: " + userEmail);
-    System.out.println("DEBUG: Password entered: " + userPassword);
     
     if (userEmail.isEmpty() || userPassword.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Please fill all fields!");
@@ -222,9 +220,8 @@ public class login extends javax.swing.JFrame {
     }
     
     configclass con = new configclass();
+    // Added u_fname to match your session requirement (using 'name' column as fname)
     String sql = "SELECT u_id, username, email, name, type FROM tbl_account WHERE email = ? AND password = ?";
-    
-    System.out.println("DEBUG: Checking database...");
     
     try {
         java.sql.Connection connection = con.connectDB();
@@ -235,41 +232,49 @@ public class login extends javax.swing.JFrame {
         java.sql.ResultSet rs = pst.executeQuery();
         
         if (rs.next()) {
+            // --- SESSION IMPLEMENTATION START ---
+            Session sess = Session.getInstance();
+            sess.setId(rs.getInt("u_id"));
+            sess.setName(rs.getString("name")); // Maps your 'name' column to session Name
+            sess.setEmail(rs.getString("email"));
+            // --- SESSION IMPLEMENTATION END ---
+
+            String name = rs.getString("name");
+            String userType = rs.getString("type");
             int userId = rs.getInt("u_id");
             String username = rs.getString("username");
             String dbEmail = rs.getString("email");
-            String name = rs.getString("name");
-            String userType = rs.getString("type");
-            
-            System.out.println("DEBUG: User type returned: " + userType);
-            System.out.println("DEBUG: User name: " + name);
-            
+
+            if (userType == null || userType.trim().isEmpty()) {
+                userType = "Student";
+            }
+            userType = userType.trim();
+
             JOptionPane.showMessageDialog(this, "Login successful! Welcome " + name);
             
-            if (userType.equalsIgnoreCase("Admin")) {
-                System.out.println("DEBUG: Opening Admin Dashboard");
-                new admindashboard().setVisible(true);
-            } else if (userType.equalsIgnoreCase("Student")) {
-                System.out.println("DEBUG: Opening Student Profile");
-                userprofile studentProfile = new userprofile(userId, username, dbEmail, name);
-                studentProfile.setVisible(true);
-            } else {
-                System.out.println("DEBUG: Unknown user type: " + userType);
-                JOptionPane.showMessageDialog(this, "Unknown user type!");
-            }
-            
-            this.dispose();
+            // Clean up resources
             rs.close();
             pst.close();
             connection.close();
             
+            this.dispose();
+            
+            if (userType.equalsIgnoreCase("Admin")) {
+                admindashboard adminWindow = new admindashboard();
+                adminWindow.setVisible(true);
+                adminWindow.setLocationRelativeTo(null);
+            } else {
+                userprofile studentWindow = new userprofile(userId, username, dbEmail, name);
+                studentWindow.setVisible(true);
+                studentWindow.setLocationRelativeTo(null);
+            }
+            
         } else {
             JOptionPane.showMessageDialog(this, "Wrong email or password!");
-            System.out.println("DEBUG: Login failed");
+            Password.setText("");
         }
         
     } catch (Exception e) {
-        System.out.println("DEBUG: Error: " + e.getMessage());
         e.printStackTrace();
         JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
     }

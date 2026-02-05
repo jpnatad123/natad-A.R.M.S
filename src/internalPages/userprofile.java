@@ -53,8 +53,10 @@ public class userprofile extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        p_name = new javax.swing.JLabel();
+        p_id = new javax.swing.JLabel();
+        p_email = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         mygrades = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -84,24 +86,25 @@ public class userprofile extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("EMAIL:");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(20, 110, 440, 50);
+        jLabel1.setBounds(20, 140, 90, 50);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("FULL NAME:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 10, 440, 50);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel3.setText("CONTACT NUMBER:");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 160, 440, 50);
+        jLabel2.setBounds(20, 10, 150, 50);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel4.setText("STUDENT ID: ");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(20, 60, 440, 50);
+        jLabel4.setBounds(10, 80, 168, 50);
+        jPanel1.add(p_name);
+        p_name.setBounds(180, 24, 190, 20);
+        jPanel1.add(p_id);
+        p_id.setBounds(180, 90, 170, 30);
+        jPanel1.add(p_email);
+        p_email.setBounds(110, 150, 180, 30);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 270));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 230));
 
         jPanel6.setBackground(new java.awt.Color(51, 51, 51));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -126,7 +129,7 @@ public class userprofile extends javax.swing.JInternalFrame {
         jLabel7.setText("MY GRADES");
         mygrades.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 116, 230, 30));
 
-        jPanel6.add(mygrades, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 230, 150));
+        jPanel6.add(mygrades, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 230, 150));
 
         SEMREP.setBackground(new java.awt.Color(153, 153, 153));
         SEMREP.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,7 +151,7 @@ public class userprofile extends javax.swing.JInternalFrame {
         jLabel9.setText("Semester Reports ");
         SEMREP.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 126, 240, 20));
 
-        jPanel6.add(SEMREP, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 230, 150));
+        jPanel6.add(SEMREP, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 230, 150));
 
         majorsubrep.setBackground(new java.awt.Color(153, 153, 153));
         majorsubrep.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -170,9 +173,9 @@ public class userprofile extends javax.swing.JInternalFrame {
         jLabel11.setText("Major Subjects Report ");
         majorsubrep.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 230, 30));
 
-        jPanel6.add(majorsubrep, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, 230, 150));
+        jPanel6.add(majorsubrep, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 230, 150));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 830, 270));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 820, 260));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -208,7 +211,6 @@ public class userprofile extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -220,5 +222,12 @@ public class userprofile extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel majorsubrep;
     private javax.swing.JPanel mygrades;
+    public javax.swing.JLabel p_email;
+    public javax.swing.JLabel p_id;
+    public javax.swing.JLabel p_name;
     // End of variables declaration//GEN-END:variables
+
+    public void setLocationRelativeTo(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
