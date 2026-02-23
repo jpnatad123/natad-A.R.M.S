@@ -136,9 +136,10 @@ public class REGISTER extends javax.swing.JFrame {
 
 String sql = "INSERT INTO tbl_account (username, email, password, name, type) VALUES (?, ?, ?, ?, ?)";
 
-con.addRecord(sql, fullname.getText(), email.getText(), pass.getText(), fullname.getText(), "Student");
+// Insert account as pending — admin must change `type` to "Student" to approve
+con.addRecord(sql, fullname.getText(), email.getText(), pass.getText(), fullname.getText(), "Pending");
 
-JOptionPane.showMessageDialog(null, "Student registered!");
+JOptionPane.showMessageDialog(null, "Registration submitted. Wait for admin approval.");
         
         login lf = new login();
         lf.setVisible(true);

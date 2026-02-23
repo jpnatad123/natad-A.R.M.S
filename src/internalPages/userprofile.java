@@ -97,10 +97,16 @@ public class userprofile extends javax.swing.JInternalFrame {
         jLabel4.setText("STUDENT ID: ");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(10, 80, 168, 50);
+
+        p_name.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
         jPanel1.add(p_name);
         p_name.setBounds(180, 24, 190, 20);
+
+        p_id.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
         jPanel1.add(p_id);
         p_id.setBounds(180, 90, 170, 30);
+
+        p_email.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
         jPanel1.add(p_email);
         p_email.setBounds(110, 150, 180, 30);
 
@@ -121,7 +127,7 @@ public class userprofile extends javax.swing.JInternalFrame {
         mygrades.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/gradereport-icon.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-grades-100.png"))); // NOI18N
         mygrades.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 130));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -143,13 +149,13 @@ public class userprofile extends javax.swing.JInternalFrame {
         SEMREP.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/gradereport-icon.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-graph-report-100.png"))); // NOI18N
         SEMREP.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 130));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Semester Reports ");
-        SEMREP.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 126, 240, 20));
+        SEMREP.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 126, 220, 20));
 
         jPanel6.add(SEMREP, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 230, 150));
 
@@ -165,7 +171,7 @@ public class userprofile extends javax.swing.JInternalFrame {
         majorsubrep.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/gradereport-icon.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-subjects-100.png"))); // NOI18N
         majorsubrep.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 130));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -175,7 +181,7 @@ public class userprofile extends javax.swing.JInternalFrame {
 
         jPanel6.add(majorsubrep, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 230, 150));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 820, 260));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 840, 260));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -189,24 +195,25 @@ public class userprofile extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mygradesMouseExited
 
     private void SEMREPMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SEMREPMouseEntered
-        // TODO add your handling code here:
+         SEMREP.setBackground(bodycolor);
     }//GEN-LAST:event_SEMREPMouseEntered
 
     private void SEMREPMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SEMREPMouseExited
-        // TODO add your handling code here:
+               SEMREP.setBackground(navcolor);
+
     }//GEN-LAST:event_SEMREPMouseExited
 
     private void majorsubrepMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_majorsubrepMouseEntered
-        // TODO add your handling code here:
+        majorsubrep.setBackground(bodycolor);
     }//GEN-LAST:event_majorsubrepMouseEntered
 
     private void majorsubrepMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_majorsubrepMouseExited
-        // TODO add your handling code here:
+               majorsubrep.setBackground(navcolor);
     }//GEN-LAST:event_majorsubrepMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel SEMREP;
+    public javax.swing.JPanel SEMREP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -220,14 +227,14 @@ public class userprofile extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel majorsubrep;
-    private javax.swing.JPanel mygrades;
+    public javax.swing.JPanel majorsubrep;
+    public javax.swing.JPanel mygrades;
     public javax.swing.JLabel p_email;
     public javax.swing.JLabel p_id;
     public javax.swing.JLabel p_name;
     // End of variables declaration//GEN-END:variables
 
     public void setLocationRelativeTo(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }

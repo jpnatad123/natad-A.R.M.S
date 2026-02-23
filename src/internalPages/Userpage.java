@@ -6,9 +6,13 @@
 package internalPages;
 
 import config.configclass;
+import java.awt.Color;
 import net.proteanit.sql.DbUtils;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 /**
@@ -52,7 +56,9 @@ public class Userpage extends javax.swing.JInternalFrame {
     }
 
     
-
+ Color navcolor = new Color(102,102,102);
+    Color headcolor = new Color(102,102,102);
+    Color bodycolor = new Color(204,204,204);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,8 +72,19 @@ public class Userpage extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablecontents = new javax.swing.JTable();
+        edit = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        add = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        remove = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablecontents.setModel(new javax.swing.table.DefaultTableModel(
@@ -91,26 +108,243 @@ public class Userpage extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tablecontents);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 430));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 890, 410));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, Short.MAX_VALUE)
-        );
+        edit.setBackground(new java.awt.Color(102, 102, 102));
+        edit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                editMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                editMouseExited(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editMouseClicked(evt);
+            }
+        });
+        edit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
+        jLabel1.setText("Edit profile");
+        edit.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
+
+        jPanel1.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 140, 40));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/editprofile.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 120));
+
+        add.setBackground(new java.awt.Color(102, 102, 102));
+        add.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addMouseExited(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addMouseClicked(evt);
+            }
+        });
+        add.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
+        jLabel3.setText("Add User");
+        add.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 20));
+
+        jPanel1.add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 130, 40));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/adduser.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, 120));
+
+        remove.setBackground(new java.awt.Color(102, 102, 102));
+        remove.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                removeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                removeMouseExited(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeMouseClicked(evt);
+            }
+        });
+        remove.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
+        jLabel5.setText("Remove user");
+        remove.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 20));
+
+        jPanel1.add(remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, -1, 40));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove.png"))); // NOI18N
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, -1, 120));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 530));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-  
+    private void editMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseEntered
+        edit.setBackground(bodycolor);
+    }//GEN-LAST:event_editMouseEntered
+
+    private void editMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseExited
+        edit.setBackground(navcolor);
+    }//GEN-LAST:event_editMouseExited
+
+    private void addMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseEntered
+        add.setBackground(bodycolor);
+    }//GEN-LAST:event_addMouseEntered
+
+    private void addMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMouseExited
+        add.setBackground(navcolor);
+    }//GEN-LAST:event_addMouseExited
+
+    private void removeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeMouseEntered
+        remove.setBackground(bodycolor);
+    }//GEN-LAST:event_removeMouseEntered
+
+    private void removeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeMouseExited
+        remove.setBackground(navcolor);
+    }//GEN-LAST:event_removeMouseExited
+
+    // ADD USER - CREATE operation
+    private void addMouseClicked(java.awt.event.MouseEvent evt) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        JTextField usernameField = new JTextField(15);
+        JTextField emailField = new JTextField(15);
+        JPasswordField passwordField = new JPasswordField(15);
+        JComboBox<String> typeCombo = new JComboBox<>(new String[]{"Admin", "Teacher", "Student"});
+
+        panel.add(new JLabel("Username:"));
+        panel.add(usernameField);
+        panel.add(new JLabel("Email:"));
+        panel.add(emailField);
+        panel.add(new JLabel("Password:"));
+        panel.add(passwordField);
+        panel.add(new JLabel("User Type:"));
+        panel.add(typeCombo);
+
+        int result = JOptionPane.showConfirmDialog(this, panel, "Add New User",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String username = usernameField.getText();
+            String email = emailField.getText();
+            String password = new String(passwordField.getPassword());
+            String type = (String) typeCombo.getSelectedItem();
+
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            configclass config = new configclass();
+            String sql = "INSERT INTO tbl_account (username, email, password, name, type) VALUES (?, ?, ?, ?, ?)";
+            config.addRecord(sql, username, email, password, username, type);
+            loadAccountData();
+            JOptionPane.showMessageDialog(this, "User added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    // EDIT USER - UPDATE operation
+    private void editMouseClicked(java.awt.event.MouseEvent evt) {
+        int selectedRow = tablecontents.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a user to edit!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Get the user ID from the first column
+        int userId = (int) tablecontents.getValueAt(selectedRow, 0);
+        String currentUsername = (String) tablecontents.getValueAt(selectedRow, 1);
+        String currentEmail = (String) tablecontents.getValueAt(selectedRow, 2);
+        String currentType = (String) tablecontents.getValueAt(selectedRow, 3);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        JTextField usernameField = new JTextField(currentUsername, 15);
+        JTextField emailField = new JTextField(currentEmail, 15);
+        JComboBox<String> typeCombo = new JComboBox<>(new String[]{"Admin", "Teacher", "Student"});
+        typeCombo.setSelectedItem(currentType);
+
+        panel.add(new JLabel("Username:"));
+        panel.add(usernameField);
+        panel.add(new JLabel("Email:"));
+        panel.add(emailField);
+        panel.add(new JLabel("User Type:"));
+        panel.add(typeCombo);
+
+        int result = JOptionPane.showConfirmDialog(this, panel, "Edit User",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String newUsername = usernameField.getText();
+            String newEmail = emailField.getText();
+            String newType = (String) typeCombo.getSelectedItem();
+
+            if (newUsername.isEmpty() || newEmail.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            configclass config = new configclass();
+            String sql = "UPDATE tbl_account SET username = ?, email = ?, name = ?, type = ? WHERE u_id = ?";
+            boolean success = config.updateRecord(sql, newUsername, newEmail, newUsername, newType, userId);
+
+            if (success) {
+                loadAccountData();
+                JOptionPane.showMessageDialog(this, "User updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to update user!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    // DELETE USER - DELETE operation
+    private void removeMouseClicked(java.awt.event.MouseEvent evt) {
+        int selectedRow = tablecontents.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a user to delete!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int userId = (int) tablecontents.getValueAt(selectedRow, 0);
+        String username = (String) tablecontents.getValueAt(selectedRow, 1);
+
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to delete user: " + username + "?",
+                "Confirm Delete", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            configclass config = new configclass();
+            String sql = "DELETE FROM tbl_account WHERE u_id = ?";
+            boolean success = config.deleteRecord(sql, userId);
+
+            if (success) {
+                loadAccountData();
+                JOptionPane.showMessageDialog(this, "User deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to delete user!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel add;
+    private javax.swing.JPanel edit;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel remove;
     private javax.swing.JTable tablecontents;
     // End of variables declaration//GEN-END:variables
 }

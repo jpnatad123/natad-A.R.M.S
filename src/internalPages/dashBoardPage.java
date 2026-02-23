@@ -271,27 +271,27 @@ public class dashBoardPage extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_SETTINGSMouseExited
 
     private void REPORT1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REPORT1MouseEntered
-        // TODO add your handling code here:
+        REPORT1.setBackground(bodycolor);
     }//GEN-LAST:event_REPORT1MouseEntered
 
     private void REPORT1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REPORT1MouseExited
-        // TODO add your handling code here:
+        REPORT1.setBackground(navcolor);
     }//GEN-LAST:event_REPORT1MouseExited
 
     private void manageuser1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageuser1MouseEntered
-        // TODO add your handling code here:
+        manageuser1.setBackground(bodycolor);
     }//GEN-LAST:event_manageuser1MouseEntered
 
     private void manageuser1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageuser1MouseExited
-        // TODO add your handling code here:
+        manageuser1.setBackground(navcolor);
     }//GEN-LAST:event_manageuser1MouseExited
 
     private void SETTINGS1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SETTINGS1MouseEntered
-        // TODO add your handling code here:
+        SETTINGS1.setBackground(bodycolor);
     }//GEN-LAST:event_SETTINGS1MouseEntered
 
     private void SETTINGS1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SETTINGS1MouseExited
-        // TODO add your handling code here:
+        SETTINGS1.setBackground(navcolor);
     }//GEN-LAST:event_SETTINGS1MouseExited
 
 

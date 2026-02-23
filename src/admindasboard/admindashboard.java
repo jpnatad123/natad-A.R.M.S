@@ -9,6 +9,8 @@ import java.awt.Color;
 import internalPages.*;
 import internalPages.dashBoardPage;
 import internalPages.userprofile;
+import Teacher.TeacherSettings;
+import students.Grades;
 
 /**
  *
@@ -49,6 +51,8 @@ public class admindashboard extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         PROFILE = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        teacher = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
 
@@ -120,9 +124,9 @@ public class admindashboard extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Students");
-        userpane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 220, 30));
+        userpane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, 30));
 
-        navbar.add(userpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 210, 50));
+        navbar.add(userpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 210, 50));
 
         reportpane.setBackground(new java.awt.Color(102, 102, 102));
         reportpane.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -140,7 +144,7 @@ public class admindashboard extends javax.swing.JFrame {
         jLabel3.setText("REPORTS");
         reportpane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 10, 210, -1));
 
-        navbar.add(reportpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, 50));
+        navbar.add(reportpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 210, 50));
 
         PROFILE.setBackground(new java.awt.Color(102, 102, 102));
         PROFILE.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -163,7 +167,28 @@ public class admindashboard extends javax.swing.JFrame {
 
         navbar.add(PROFILE, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 210, 50));
 
-        getContentPane().add(navbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 520));
+        teacher.setBackground(new java.awt.Color(102, 102, 102));
+        teacher.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                teacherMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                teacherMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                teacherMouseExited(evt);
+            }
+        });
+        teacher.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Teacher's");
+        teacher.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 210, 30));
+
+        navbar.add(teacher, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 210, 50));
+
+        getContentPane().add(navbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 520));
 
         pack();
         setLocationRelativeTo(null);
@@ -223,6 +248,19 @@ public class admindashboard extends javax.swing.JFrame {
         PROFILE.setBackground(navcolor);
     }//GEN-LAST:event_PROFILEMouseExited
 
+    private void teacherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teacherMouseClicked
+     TeacherSettings up = new TeacherSettings();
+        maindesktop.add(up).setVisible(true);
+    }//GEN-LAST:event_teacherMouseClicked
+
+    private void teacherMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teacherMouseEntered
+        teacher.setBackground(bodycolor);
+    }//GEN-LAST:event_teacherMouseEntered
+
+    private void teacherMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_teacherMouseExited
+       teacher.setBackground(navcolor);
+    }//GEN-LAST:event_teacherMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -267,10 +305,12 @@ public class admindashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JDesktopPane maindesktop;
     private javax.swing.JPanel navbar;
     private javax.swing.JPanel reportpane;
+    private javax.swing.JPanel teacher;
     private javax.swing.JPanel userpane;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,12 +5,15 @@
  */
 package newpackage;
 
+import Teacher.teacherprofile;
 import admindasboard.admindashboard;
 import config.Session;
 import config.configclass;
 import internalPages.dashBoardPage;
+import internalPages.studentprofile;
 import internalPages.userprofile;
 import javax.swing.JOptionPane;
+
 
 
 /**
@@ -211,72 +214,66 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_fullnameActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       String userEmail = email.getText();
-    String userPassword = Password.getText();
-    
-    if (userEmail.isEmpty() || userPassword.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please fill all fields!");
-        return;
-    }
-    
-    configclass con = new configclass();
-    // Added u_fname to match your session requirement (using 'name' column as fname)
-    String sql = "SELECT u_id, username, email, name, type FROM tbl_account WHERE email = ? AND password = ?";
+ configclass con = new configclass();
+    // Prioritizes names from student/teacher tables; defaults to 'Admin User' if neither match
+    String sql = "SELECT a.u_id, a.type, " +
+                 "COALESCE(s.full_name, t.full_name, 'Admin User') AS real_name, " +
+                 "COALESCE(s.email, t.email, a.email) AS real_email, " +
+                 "s.course, s.section, t.department " +
+                 "FROM tbl_account a " +
+                 "LEFT JOIN tbl_student s ON a.u_id = s.u_id " +
+                 "LEFT JOIN tbl_teacher t ON a.u_id = t.u_id " +
+                 "WHERE a.email = ? AND a.password = ?";
     
     try {
         java.sql.Connection connection = con.connectDB();
         java.sql.PreparedStatement pst = connection.prepareStatement(sql);
-        pst.setString(1, userEmail);
-        pst.setString(2, userPassword);
-        
+        pst.setString(1, email.getText());
+        pst.setString(2, Password.getText());
         java.sql.ResultSet rs = pst.executeQuery();
         
         if (rs.next()) {
-            // --- SESSION IMPLEMENTATION START ---
+            // Debug: print the raw result values to console
+            try {
+                System.out.println("[LOGIN DEBUG] u_id=" + rs.getObject("u_id")
+                    + ", type=" + rs.getObject("type")
+                    + ", real_name=" + rs.getObject("real_name")
+                    + ", real_email=" + rs.getObject("real_email")
+                    + ", course=" + rs.getObject("course")
+                    + ", section=" + rs.getObject("section")
+                    + ", department=" + rs.getObject("department")
+                );
+            } catch (Exception _e) {
+                _e.printStackTrace();
+            }
+
             Session sess = Session.getInstance();
             sess.setId(rs.getInt("u_id"));
-            sess.setName(rs.getString("name")); // Maps your 'name' column to session Name
-            sess.setEmail(rs.getString("email"));
-            // --- SESSION IMPLEMENTATION END ---
+            sess.setName(rs.getString("real_name"));
+            sess.setEmail(rs.getString("real_email"));
 
-            String name = rs.getString("name");
-            String userType = rs.getString("type");
-            int userId = rs.getInt("u_id");
-            String username = rs.getString("username");
-            String dbEmail = rs.getString("email");
-
-            if (userType == null || userType.trim().isEmpty()) {
-                userType = "Student";
-            }
-            userType = userType.trim();
-
-            JOptionPane.showMessageDialog(this, "Login successful! Welcome " + name);
-            
-            // Clean up resources
-            rs.close();
-            pst.close();
-            connection.close();
-            
+            // Null-safe role handling
+            String roleRaw = rs.getString("type");
+            String role = roleRaw == null ? "" : roleRaw.trim();
             this.dispose();
-            
-            if (userType.equalsIgnoreCase("Admin")) {
-                admindashboard adminWindow = new admindashboard();
-                adminWindow.setVisible(true);
-                adminWindow.setLocationRelativeTo(null);
-            } else {
-                userprofile studentWindow = new userprofile(userId, username, dbEmail, name);
-                studentWindow.setVisible(true);
-                studentWindow.setLocationRelativeTo(null);
+
+            // Redirect based on the 'type' column from your database
+            if (role.equalsIgnoreCase("Admin")) {
+                new admindashboard().setVisible(true);
+            } else if (role.equalsIgnoreCase("Teacher")) {
+                sess.setDepartment(rs.getString("department"));
+                new teacherprofile().setVisible(true);
+            } else if (role.equalsIgnoreCase("Student")) {
+                // Save specific student data to the session
+                sess.setcourse(rs.getString("course"));
+                sess.setsection(rs.getString("section"));
+                new studentprofile().setVisible(true);
             }
-            
         } else {
-            JOptionPane.showMessageDialog(this, "Wrong email or password!");
-            Password.setText("");
+            JOptionPane.showMessageDialog(this, "Invalid Login!");
         }
-        
     } catch (Exception e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
     }
     }//GEN-LAST:event_jButton2ActionPerformed
 
