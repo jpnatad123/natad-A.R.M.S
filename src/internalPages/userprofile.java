@@ -7,6 +7,7 @@ package internalPages;
 
 import java.awt.Color;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import newpackage.Landingpage;
 /**
  *
  * @author izana
@@ -57,6 +58,7 @@ public class userprofile extends javax.swing.JInternalFrame {
         p_name = new javax.swing.JLabel();
         p_id = new javax.swing.JLabel();
         p_email = new javax.swing.JLabel();
+        LOGOUT = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         mygrades = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -109,6 +111,15 @@ public class userprofile extends javax.swing.JInternalFrame {
         p_email.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
         jPanel1.add(p_email);
         p_email.setBounds(110, 150, 180, 30);
+
+        LOGOUT.setText("Log out");
+        LOGOUT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LOGOUTActionPerformed(evt);
+            }
+        });
+        jPanel1.add(LOGOUT);
+        LOGOUT.setBounds(510, 200, 69, 23);
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 230));
 
@@ -211,8 +222,15 @@ public class userprofile extends javax.swing.JInternalFrame {
                majorsubrep.setBackground(navcolor);
     }//GEN-LAST:event_majorsubrepMouseExited
 
+    private void LOGOUTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGOUTActionPerformed
+        Landingpage lf = new Landingpage();
+        lf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_LOGOUTActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LOGOUT;
     public javax.swing.JPanel SEMREP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

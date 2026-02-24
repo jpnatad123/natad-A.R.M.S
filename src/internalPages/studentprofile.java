@@ -10,6 +10,8 @@ import java.awt.Color;
 import config.Session;
 import config.configclass;
 import net.proteanit.sql.DbUtils;
+import newpackage.Landingpage;
+import newpackage.REGISTER;
 import students.Grades;
 /**
  *
@@ -64,6 +66,7 @@ Color navcolor = new Color(102,102,102);
         p_email = new javax.swing.JLabel();
         course = new javax.swing.JLabel();
         section = new javax.swing.JLabel();
+        LOGOUT = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         mygrades = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -124,6 +127,14 @@ Color navcolor = new Color(102,102,102);
         section.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         section.setText("Section:");
         jPanel2.add(section, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 100, -1));
+
+        LOGOUT.setText("Log out");
+        LOGOUT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LOGOUTActionPerformed(evt);
+            }
+        });
+        jPanel2.add(LOGOUT, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 230));
 
@@ -234,6 +245,12 @@ Color navcolor = new Color(102,102,102);
     g.setVisible(true);
     }//GEN-LAST:event_mygradesMouseClicked
 
+    private void LOGOUTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGOUTActionPerformed
+      Landingpage lf = new Landingpage();
+       lf.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_LOGOUTActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -270,6 +287,7 @@ Color navcolor = new Color(102,102,102);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LOGOUT;
     private javax.swing.JPanel SEMREP;
     private javax.swing.JLabel course;
     private javax.swing.JLabel jLabel1;

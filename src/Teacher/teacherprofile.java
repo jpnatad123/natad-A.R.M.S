@@ -8,6 +8,7 @@ package Teacher;
 import config.Session;
 import config.configclass;
 import net.proteanit.sql.DbUtils;
+import newpackage.Landingpage;
 /**
  *
  * @author izana
@@ -80,6 +81,7 @@ public class teacherprofile extends javax.swing.JFrame {
         p_email = new javax.swing.JLabel();
         Deparment = new javax.swing.JLabel();
         t_department = new javax.swing.JLabel();
+        LOGOUT = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         Students = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -122,10 +124,10 @@ public class teacherprofile extends javax.swing.JFrame {
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, 50));
 
         p_name.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
-        jPanel2.add(p_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 24, 190, 30));
+        jPanel2.add(p_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 190, 30));
 
         p_id.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
-        jPanel2.add(p_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 170, 30));
+        jPanel2.add(p_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 170, 30));
 
         p_email.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
         jPanel2.add(p_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 180, 30));
@@ -135,7 +137,15 @@ public class teacherprofile extends javax.swing.JFrame {
         jPanel2.add(Deparment, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
         t_department.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
-        jPanel2.add(t_department, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 130, 30));
+        jPanel2.add(t_department, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 130, 30));
+
+        LOGOUT.setText("Log out");
+        LOGOUT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LOGOUTActionPerformed(evt);
+            }
+        });
+        jPanel2.add(LOGOUT, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 260));
 
@@ -191,6 +201,12 @@ public class teacherprofile extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void LOGOUTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGOUTActionPerformed
+        Landingpage lf = new Landingpage();
+        lf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_LOGOUTActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -229,6 +245,7 @@ public class teacherprofile extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Deparment;
     private javax.swing.JPanel EncodeGrades;
+    private javax.swing.JButton LOGOUT;
     private javax.swing.JPanel Students;
     private javax.swing.JPanel announcement;
     private javax.swing.JLabel jLabel1;

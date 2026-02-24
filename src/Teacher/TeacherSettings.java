@@ -5,8 +5,9 @@
  */
 package Teacher;
 import java.awt.Color;
-import config.configclass;
-import net.proteanit.sql.DbUtils;
+import config.configclass; // Import your helper class
+import java.sql.*; // Simplified SQL imports
+import net.proteanit.sql.DbUtils; // For JTable filling
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
@@ -71,6 +72,9 @@ public class TeacherSettings extends javax.swing.JInternalFrame {
         remove = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        searchbar = new javax.swing.JTextField();
+        search = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -91,18 +95,18 @@ public class TeacherSettings extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tbl_teacher);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 910, 440));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 830, 400));
 
         header.setBackground(new java.awt.Color(102, 102, 102));
         header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         edit.setBackground(new java.awt.Color(102, 102, 102));
         edit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                editMouseEntered(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 editMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                editMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 editMouseExited(evt);
@@ -110,7 +114,7 @@ public class TeacherSettings extends javax.swing.JInternalFrame {
         });
         edit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Edit profile");
         edit.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 10, 130, 20));
@@ -122,11 +126,11 @@ public class TeacherSettings extends javax.swing.JInternalFrame {
 
         add.setBackground(new java.awt.Color(102, 102, 102));
         add.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addMouseEntered(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 addMouseExited(evt);
@@ -134,22 +138,22 @@ public class TeacherSettings extends javax.swing.JInternalFrame {
         });
         add.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Add User");
         add.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 20));
 
-        header.add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 130, 40));
+        header.add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 90, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/adduser.png"))); // NOI18N
-        header.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, 130));
+        header.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, -1, 130));
 
         remove.setBackground(new java.awt.Color(102, 102, 102));
         remove.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                removeMouseEntered(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 removeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                removeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 removeMouseExited(evt);
@@ -157,18 +161,63 @@ public class TeacherSettings extends javax.swing.JInternalFrame {
         });
         remove.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 21)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Remove user");
-        remove.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 20));
+        remove.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 20));
 
-        header.add(remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 150, 40));
+        header.add(remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 120, 40));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove.png"))); // NOI18N
-        header.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, -1, 130));
+        header.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, -1, 130));
 
-        jPanel1.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 140));
+        searchbar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        searchbar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchbarActionPerformed(evt);
+            }
+        });
+        searchbar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchbarKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchbarKeyReleased(evt);
+            }
+        });
+        header.add(searchbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 60, 110, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1230, 624));
+        search.setBackground(new java.awt.Color(102, 102, 102));
+        search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                searchMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                searchMouseExited(evt);
+            }
+        });
+        search.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel7.setText("SEARCH");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel7MouseExited(evt);
+            }
+        });
+        search.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 20));
+
+        header.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 110, 20));
+
+        jPanel1.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 140));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -356,6 +405,47 @@ public class TeacherSettings extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_removeMouseClicked
 
+    private void searchbarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbarActionPerformed
+    // Create an instance of your configclass
+    config.configclass conf = new config.configclass();
+    
+    // Define what you want to search (Name or Teacher Number)
+    String sql = "SELECT * FROM tbl_teacher WHERE full_name LIKE ? OR teacher_number LIKE ?";
+    
+    // Tell the config class to do the work
+    conf.searchData(sql, tbl_teacher, searchbar.getText());
+    }//GEN-LAST:event_searchbarActionPerformed
+
+    private void searchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMouseEntered
+            
+    }//GEN-LAST:event_searchMouseEntered
+
+    private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
+         search.setBackground(bodycolor);
+    }//GEN-LAST:event_jLabel7MouseEntered
+
+    private void searchMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMouseExited
+       
+    }//GEN-LAST:event_searchMouseExited
+
+    private void jLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseExited
+          search.setBackground(navcolor);
+    }//GEN-LAST:event_jLabel7MouseExited
+
+    private void searchbarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchbarKeyReleased
+   configclass conf = new configclass();
+String sql = "SELECT * FROM tbl_teacher WHERE full_name LIKE ? OR teacher_number LIKE ?";
+conf.searchData(sql, tbl_teacher, searchbar.getText());
+    }//GEN-LAST:event_searchbarKeyReleased
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void searchbarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchbarKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchbarKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -401,9 +491,12 @@ public class TeacherSettings extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel remove;
+    private javax.swing.JPanel search;
+    private javax.swing.JTextField searchbar;
     private javax.swing.JTable tbl_teacher;
     // End of variables declaration//GEN-END:variables
 }
